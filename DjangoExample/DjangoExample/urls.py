@@ -19,5 +19,6 @@ import ModelExample.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('contact/', ModelExample.views.ListContactView.as_view())
+    path('contact/', ModelExample.views.ListContactView.as_view(),name="contacts-list"),
+    path('new/', ModelExample.views.CreateContactView.as_view(), name="contacts-new"),
 ]
