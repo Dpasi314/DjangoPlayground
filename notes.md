@@ -1,10 +1,9 @@
-==============================
-=			     =
-=	Setting Up           =
-=			     =
-==============================
+# Setting up
+```
 $django-admin.py startproject [project name]
-	* Creates scaffolding for project
+```
+- Creates scaffolding for project
+```
 	>>> django-admin.py startproject addressbook
 	>>>	manage.py	        # Is a pointer back to django-admin.py *WITH* an environment variable set, 
 				        #pointing to this project as the one to read settings from and operate on when needed.
@@ -13,11 +12,14 @@ $django-admin.py startproject [project name]
 			settings.py	# This is where you'll configure the project. Sensible defaults, bu no database chosen when you start
 			urls.py		# contains the URL ---> VIEW mappings
 			wsgi.py		# This is a WSGI (Web Server Gateway Interface) for your application. Used by dev servers, and possibly other containers
-
-1.      Creating the "App"
+```
+## 1. Creating the "App"
+```
 $ python ./manage.py startapp [application name]
-        * Creates a new application in the project. 
-        * SINCE Django 1.4 : Apps are placed alongside _project_ packages. Advantageous in terms of deployment
+```
+- Creates a new application in the project. 
+- **SINCE Django 1.4** : Apps are placed alongside _project_ packages. Advantageous in terms of deployment
+```
 	>>> python ./manage.py startapp contacts
 	>>>	./addressbook
 		./contacts
@@ -26,19 +28,16 @@ $ python ./manage.py startapp [application name]
 			tests.py	# Will contain the View code
 			views.py	# Will contain the unit and integration tests that are written
 
-	
-==============================
-=			     =
-=	Using Models         =
-=			     =
-==============================
+```
 
-1.	Configuring the Database
+# Using Models
+
+## 1. Configuring the Database
 Django has support for { MySQL, PostgreSQL, SQLite3, Oracle } 
-	* When using MySQL (for example) you'd need mysql-python to support your requirements.txt file
+- When using MySQL (for example) you'd need mysql-python to support your requirements.txt file
 
-	* When choosing a database, you need to edit the DATABASES definition in `addressbook/settings.py`.
-
+- When choosing a database, you need to edit the DATABASES definition in `addressbook/settings.py`.
+```
 		DATABASES = {
 		    'default': {
 		        'ENGINE': 'django.db.backends.sqlite3',  # 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -49,10 +48,11 @@ Django has support for { MySQL, PostgreSQL, SQLite3, Oracle }
 		        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
 		    }
 		}
-	
-2.	Creating a model
+```
+## 2. Creating a model
 A model in Django closely resembles a database table. A place to encapsulate business logic. 
 ALL models subclass the base Model, each subclass has field conditions.
+```
 	>>> contacts/models.py
 		from django.db import models
 		# A list of fields can be found: https://docs.djangoproject.com/en/1.8/ref/models/fields/
@@ -72,9 +72,10 @@ ALL models subclass the base Model, each subclass has field conditions.
 					self.first_name,
 					self.last_name
 				])
-	
+```	
 
-	* Once created, the app needs to be installed in INSTALLED_APPS settings
+- Once created, the app needs to be installed in INSTALLED_APPS settings
+```
 		INSTALLED_APPS = (
 		    'django.contrib.auth',
 		    'django.contrib.contenttypes',
@@ -90,7 +91,6 @@ ALL models subclass the base Model, each subclass has field conditions.
 		)
 
 	>>> python manage.py migrate
-
-
+```
 
 
