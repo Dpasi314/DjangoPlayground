@@ -93,4 +93,48 @@ ALL models subclass the base Model, each subclass has field conditions.
 	>>> python manage.py migrate
 ```
 
+# Writing Views
+## 1. View Basics
+Django view take an **HTTP Request** and return to the user a **HTTP Response**
+Any Python object can be a view, it must take in a request parameter
+```python
+from django.http import HttpResponse
+
+def hello_world(request):
+	return HttpResponse("Hello World")
+```
+This is the simpliest form of a view.
+The ListView is a subclass which has additional behaviors, we can create a view in the `views.py` file as follows:
+```python
+from django.views.generic import ListView
+
+from contacts.models import Contact
+
+
+class ListContactView(ListView):
+
+    model = Contact
+```
+
+## 2. Defining URLs
+A URL is how Django delgates a request to the python code. Django makes use of `urlpatterns` in the `urls.py` file, located in the **project**
+
+An example URL mapping for the Contact ListView would look like this:
+```python
+from django.conf.urls import patterns, include, url
+
+import contacts.views
+
+
+urlpatterns = patterns('',
+    url(r'^$', contacts.views.ListContactView.as_view(),
+        name='contacts-list',),
+)
+```
+### Some important notes
+- The URL function is not _strictly_ required. Used mostly for clarity
+- The first parameter is a `Regular Expression`
+- The second parameter is a view callable, can also be a module name string
+	- If we're using a class based view (which we are) this **must** be a real object
+- Giving the URL pattern an name allows for reverse lookup!
 
