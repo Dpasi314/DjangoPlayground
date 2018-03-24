@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact/', ModelExample.views.ListContactView.as_view(),name="contacts-list"),
     path('new/', ModelExample.views.CreateContactView.as_view(), name="contacts-new"),
+    path('remove/<int:pk>/', ModelExample.views.DeleteContactView.as_view(), name="contacts-delete"),
 ]

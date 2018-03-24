@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView
-from django.urls import reverse
+from django.views.generic.edit import DeleteView
+from django.urls import reverse, reverse_lazy
 
 from ModelExample.models import Contact
 
@@ -18,3 +19,12 @@ class CreateContactView(CreateView):
 
     def get_success_url(self):
         return reverse('contacts-list')
+
+class DeleteContactView(DeleteView):
+    model = Contact
+    template_name = 'contact_confirm_delete.html'
+    success_url = reverse_lazy('contacts-list')
+
+
+
+ 
